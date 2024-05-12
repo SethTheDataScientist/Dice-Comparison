@@ -16,6 +16,7 @@ def main():
     final_roll_value = 6
     full_loop_test = 0
     min_value_seen = 410000000
+    cumulative_rolls = 0
     start_time = time.time()  # Start timing the dice rolling process
     while final_rolls != final_roll_value:
         current_index = 0
@@ -37,11 +38,12 @@ def main():
             # average_rolls.append(total_rolls)
         
         # loop_average.append(loop_rolls)
+        cumulative_rolls += total_rolls
         final_rolls = total_rolls
         if total_rolls < min_value_seen:
             min_value_seen = total_rolls
         full_loop_test += 1
-        if full_loop_test % 10 == 0:
+        if full_loop_test % 100 == 0:
             print(full_loop_test)   
             print(f'Min Value: {min_value_seen}')
     elapsed_time = time.time() - start_time  # Calculate elapsed time after completion
@@ -50,7 +52,9 @@ def main():
     # print(f'Average number of rolls it achieved per run {np.mean(average_rolls):.2f}')
     # print(f'Average number of rolls it achieved per loop {np.mean(loop_average):.2f}')
     print(f"Total time taken: {elapsed_time:.2f} seconds")
-    print(f'The final amount of rolls was {final_rolls}')
+    print(f'The final amount of rolls was {cumulative_rolls}')
+    human_time = (cumulative_rolls * 1.5)/60/60
+    print(f'This would take a human {human_time} HOURS to complete')
 
 if __name__ == "__main__":
 
